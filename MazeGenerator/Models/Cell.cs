@@ -21,5 +21,10 @@ namespace MazeGenerator.Models
                 cell.Link(this);
             }
         }
+
+        public bool IsLinked(Cell cell)
+        {
+            return Links.Contains(cell);
+        }
     }
 }

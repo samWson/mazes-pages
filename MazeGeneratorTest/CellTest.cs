@@ -30,6 +30,13 @@ namespace MazeGeneratorTest
                 item => Assert.Equal<Cell>(_firstCell, item)
                 );
         }
+
+        [Fact]
+        public void TestIsLinked()
+        {
+            _firstCell.Link(_secondCell, true);
+
+            Assert.True(_firstCell.IsLinked(_secondCell));
         }
     }
 }

@@ -1,4 +1,3 @@
-using System;
 using Xunit;
 using MazeGenerator.Models;
 
@@ -18,7 +17,7 @@ namespace MazeGeneratorTest
         [Fact]
         public void TestLink()
         {
-            _firstCell.Link(_secondCell, true);
+            _firstCell.LinkBidirectionally(_secondCell);
 
             Assert.Collection<Cell>(
                 _firstCell.Links,
@@ -34,7 +33,7 @@ namespace MazeGeneratorTest
         [Fact]
         public void TestIsLinked()
         {
-            _firstCell.Link(_secondCell, true);
+            _firstCell.LinkBidirectionally(_secondCell);
 
             Assert.True(_firstCell.IsLinked(_secondCell));
         }

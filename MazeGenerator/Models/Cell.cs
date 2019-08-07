@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace MazeGenerator.Models
 {
@@ -12,19 +11,20 @@ namespace MazeGenerator.Models
             Links = new List<Cell>();
         }
 
-        public void Link(Cell cell, bool bidirectional = false)
+        public void LinkBidirectionally(Cell cell)
         {
-            Links.Add(cell);
-
-            if (bidirectional)
-            {
-                cell.Link(this);
-            }
+            this.Link(cell);
+            cell.Link(this);
         }
 
         public bool IsLinked(Cell cell)
         {
             return Links.Contains(cell);
+        }
+
+        private void Link(Cell cell)
+        {
+            Links.Add(cell);
         }
     }
 }

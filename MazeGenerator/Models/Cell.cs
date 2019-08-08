@@ -4,10 +4,14 @@ namespace MazeGenerator.Models
 {
     public class Cell
     {
+        public int Row { get; }
+        public int Column { get; }
         public List<Cell> Links { get; set; }
 
-        public Cell()
+        public Cell(Point coordinates)
         {
+            Column = coordinates.X;
+            Row = coordinates.Y;
             Links = new List<Cell>();
         }
 

@@ -10,8 +10,8 @@ namespace MazeGeneratorTest
 
         public CellTest()
         {
-            _firstCell = new Cell();
-            _secondCell = new Cell();
+            _firstCell = new Cell(new Point(1, 1));
+            _secondCell = new Cell(new Point(2, 1));
         }
 
         [Fact]

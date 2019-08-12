@@ -8,12 +8,12 @@
     <h1 class="display-4">Maze Generator</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 
-    <form method="post" id="mazeAttributes">
+    <form method="post" asp-page-handler="generate" id="mazeAttributes">
         <label for="rows">Number of rows (minimum 2)</label>
-        <input type="text" name="rows" min="2">
+        <input type="number" name="rows" min="2">
 
         <label for="columns">Number of columns (minimum 2)</label>
-        <input type="text" name="columns" min="2">
+        <input type="number" name="columns" min="2">
 
         <button type="submit">Generate</button>
     </form>

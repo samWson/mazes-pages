@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MazeGenerator.Models;
 
@@ -19,8 +15,6 @@ namespace MazeGenerator.Pages
     {
       Grid grid = new Grid(new Point(columns, rows));
 
-      // TODO: Eventually set this as `Maze = grid.ToString();`
-      Maze = $"This is where the maze goes. It is made of {rows} rows and {columns} columns.\n\n";
       Maze += grid.ToString();
     }
   }

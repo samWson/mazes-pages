@@ -15,31 +15,27 @@ namespace MazeGenerator.Algorithms
 
     public void Apply()
     {
-      for (int y = 0; y < grid.Rows; y++)
+      foreach (Cell cell in grid)
       {
-        for (int x = 0; x < grid.Columns; x++)
+        List<Cell> neighbors = new List<Cell>();
+
+        if (cell.North != null)
         {
-          Cell cell = grid.CellAt(new Point(x + 1, y + 1));
-          List<Cell> neighbors = new List<Cell>();
+          neighbors.Add(cell.North);
+        }
 
-          if (cell.North != null)
-          {
-            neighbors.Add(cell.North);
-          }
+        if (cell.East != null)
+        {
+          neighbors.Add(cell.East);
+        }
 
-          if (cell.East != null)
-          {
-            neighbors.Add(cell.East);
-          }
+        if (neighbors.Count > 0)
+        {
+          Random random = new Random();
+          int index = random.Next(0, neighbors.Count);
 
-          if (neighbors.Count > 0)
-          {
-            Random random = new Random();
-            int index = random.Next(0, neighbors.Count);
-
-            Cell neighbor = neighbors[index];
-            cell.LinkBidirectionally(neighbor);
-          }
+          Cell neighbor = neighbors[index];
+          cell.LinkBidirectionally(neighbor);
         }
       }
     }

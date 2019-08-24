@@ -1,4 +1,6 @@
 using System.Text;
+using System.Collections.Generic;
+using System.Collections;
 
 namespace MazeGenerator.Models
 {
@@ -6,7 +8,7 @@ namespace MazeGenerator.Models
   /// Access to cells in the grid is through X and Y coordinates.
   /// The grid position of X = 1 and Y = 1 starts in the top left,
   /// or north western corner.
-  public class Grid
+  public class Grid : IEnumerable<Cell>
   {
     public int Columns { get; }
     public int Rows { get; }
@@ -18,7 +20,7 @@ namespace MazeGenerator.Models
       ConfigureCells();
     }
 
-    private Cell[,] _cells;
+    private Cell[,] cells;
 
     private const string cellCorner = "+";
     private const string cellBody = "   "; // Three whitespaces.
@@ -31,16 +33,16 @@ namespace MazeGenerator.Models
 
     public void LinkCells(Point firstCoordinate, Point secondCoordinate)
     {
-      Cell firstCell = _cells[firstCoordinate.X, firstCoordinate.Y];
-      Cell secondCell = _cells[secondCoordinate.X, secondCoordinate.Y];
+      Cell firstCell = cells[firstCoordinate.X, firstCoordinate.Y];
+      Cell secondCell = cells[secondCoordinate.X, secondCoordinate.Y];
 
       firstCell.LinkBidirectionally(secondCell);
     }
 
     public bool AreCellsLinked(Point firstCoordinate, Point secondCoordinate)
     {
-      Cell firstCell = _cells[firstCoordinate.X, secondCoordinate.Y];
-      Cell secondCell = _cells[secondCoordinate.X, secondCoordinate.Y];
+      Cell firstCell = cells[firstCoordinate.X, secondCoordinate.Y];
+      Cell secondCell = cells[secondCoordinate.X, secondCoordinate.Y];
 
       return firstCell.IsLinked(secondCell);
     }
@@ -57,7 +59,7 @@ namespace MazeGenerator.Models
         return null;
       }
 
-      return _cells[coordinates.X - 1, coordinates.Y - 1];
+      return cells[coordinates.X - 1, coordinates.Y - 1];
     }
 
     /// ToString() is overriden to output an ASCII art representation
@@ -69,6 +71,22 @@ namespace MazeGenerator.Models
       buildRows();
 
       return asciiArt.ToString();
+    }
+
+    public IEnumerator<Cell> GetEnumerator()
+    {
+      for (int x = 0; x < Columns; x++)
+      {
+        for (int y = 0; y < Rows; y++)
+        {
+          yield return this.CellAt(new Point(x + 1, y + 1));
+        }
+      }
+    }
+
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+      return this.GetEnumerator();
     }
 
     private void appendNorthBoundary()
@@ -85,13 +103,11 @@ namespace MazeGenerator.Models
 
     private void buildRows()
     {
-      // for (int x = 0; x < Columns; x++)
       for (int y = 0; y < Rows; y++)
       {
         StringBuilder rowTopBuilder = new StringBuilder(unlinkedVerticalBoundary);
         StringBuilder rowBottomBuilder = new StringBuilder(cellCorner);
 
-        // for (int y = 0; y < Rows; y++)
         for (int x = 0; x < Columns; x++)
         {
           Cell cell = this.CellAt(new Point(x + 1, y + 1));
@@ -131,25 +147,20 @@ namespace MazeGenerator.Models
         }
       }
 
-      _cells = cells;
+      this.cells = cells;
     }
 
     private void ConfigureCells()
     {
-      for (int x = 0; x < Columns; x++)
+      foreach (Cell cell in this)
       {
-        for (int y = 0; y < Rows; y++)
-        {
-          Cell cell = this.CellAt(new Point(x + 1, y + 1));
+        int column = cell.Column;
+        int row = cell.Row;
 
-          int column = cell.Column;
-          int row = cell.Row;
-
-          cell.North = this.CellAt(new Point(column, row - 1));
-          cell.South = this.CellAt(new Point(column, row + 1));
-          cell.East = this.CellAt(new Point(column + 1, row));
-          cell.West = this.CellAt(new Point(column - 1, row));
-        }
+        cell.North = this.CellAt(new Point(column, row - 1));
+        cell.South = this.CellAt(new Point(column, row + 1));
+        cell.East = this.CellAt(new Point(column + 1, row));
+        cell.West = this.CellAt(new Point(column - 1, row));
       }
     }
   }

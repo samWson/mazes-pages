@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MazeGenerator.Models;
+using MazeGenerator.Algorithms;
 
 namespace MazeGenerator.Pages
 {
@@ -14,6 +15,8 @@ namespace MazeGenerator.Pages
     public void OnPostGenerate(int rows, int columns)
     {
       Grid grid = new Grid(new Point(columns, rows));
+      BinaryTree linkingAlgorithm = new BinaryTree(grid);
+      linkingAlgorithm.Apply();
 
       Maze += grid.ToString();
     }

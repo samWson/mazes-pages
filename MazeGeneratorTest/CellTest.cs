@@ -5,37 +5,39 @@ namespace MazeGeneratorTest
 {
   public class CellTest
   {
-    private readonly Cell _firstCell;
-    private readonly Cell _secondCell;
+    private readonly Cell centerCell;
+    private readonly Cell eastCell;
+    private readonly Cell northCell;
 
     public CellTest()
     {
-      _firstCell = new Cell(new Point(1, 1));
-      _secondCell = new Cell(new Point(2, 1));
+      centerCell = new Cell(new Point(1, 2));
+      eastCell = new Cell(new Point(2, 2));
+      northCell = new Cell(new Point(1, 2));
     }
 
     [Fact]
     public void TestLink()
     {
-      _firstCell.LinkBidirectionally(_secondCell);
+      centerCell.LinkBidirectionally(eastCell);
 
       Assert.Collection<Cell>(
-          _firstCell.Links,
-          item => Assert.Equal<Cell>(_secondCell, item)
+          centerCell.Links,
+          item => Assert.Equal<Cell>(eastCell, item)
           );
 
       Assert.Collection<Cell>(
-          _secondCell.Links,
-          item => Assert.Equal<Cell>(_firstCell, item)
+          eastCell.Links,
+          item => Assert.Equal<Cell>(centerCell, item)
           );
     }
 
     [Fact]
     public void TestIsLinked()
     {
-      _firstCell.LinkBidirectionally(_secondCell);
+      centerCell.LinkBidirectionally(eastCell);
 
-      Assert.True(_firstCell.IsLinked(_secondCell));
+      Assert.True(centerCell.IsLinked(eastCell));
     }
   }
 }

@@ -7,36 +7,46 @@ namespace MazeGenerator.Algorithms
   public class BinaryTree
   {
     private Grid grid;
+    private List<Cell> neighbors;
 
     public BinaryTree(Grid grid)
     {
       this.grid = grid;
+      neighbors = new List<Cell>();
     }
 
     public void Apply()
     {
       foreach (Cell cell in grid)
       {
-        List<Cell> neighbors = new List<Cell>();
+        addNeighbors(cell);
+        linkRandomNeighbor(cell);
+      }
+    }
 
-        if (cell.North != null)
-        {
-          neighbors.Add(cell.North);
-        }
+    private void addNeighbors(Cell cell)
+    {
+      if (cell.North != null)
+      {
+        neighbors.Add(cell.North);
+      }
 
-        if (cell.East != null)
-        {
-          neighbors.Add(cell.East);
-        }
+      if (cell.East != null)
+      {
+        neighbors.Add(cell.East);
+      }
+    }
 
-        if (neighbors.Count > 0)
-        {
-          Random random = new Random();
-          int index = random.Next(0, neighbors.Count);
+    private void linkRandomNeighbor(Cell cell)
+    {
+      if (neighbors.Count > 0)
+      {
+        Random random = new Random();
+        int index = random.Next(0, neighbors.Count);
 
-          Cell neighbor = neighbors[index];
-          cell.LinkBidirectionally(neighbor);
-        }
+        Cell neighbor = neighbors[index];
+        cell.LinkBidirectionally(neighbor);
+        neighbors.Clear();
       }
     }
   }

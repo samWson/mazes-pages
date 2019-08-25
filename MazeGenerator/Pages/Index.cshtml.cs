@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MazeGenerator.Models;
 using MazeGenerator.Algorithms;
+using System.Drawing;
 
 namespace MazeGenerator.Pages
 {

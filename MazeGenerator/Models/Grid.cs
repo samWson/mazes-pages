@@ -1,6 +1,7 @@
 using System.Text;
 using System.Collections.Generic;
 using System.Collections;
+using System.Drawing;
 
 namespace MazeGenerator.Models
 {

@@ -1,5 +1,6 @@
 using Xunit;
 using MazeGenerator.Models;
+using System.Drawing;
 
 namespace MazeGeneratorTest
 {

@@ -16,7 +16,8 @@ namespace MazeGenerator.Pages
     public void OnPostGenerate(int rows, int columns)
     {
       Grid grid = new Grid(new Point(columns, rows));
-      BinaryTree linkingAlgorithm = new BinaryTree(grid);
+      // BinaryTree linkingAlgorithm = new BinaryTree(grid);
+      Sidewinder linkingAlgorithm = new Sidewinder(grid);
       linkingAlgorithm.Apply();
 
       Maze += grid.ToString();

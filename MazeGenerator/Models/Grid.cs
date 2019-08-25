@@ -76,9 +76,9 @@ namespace MazeGenerator.Models
 
     public IEnumerator<Cell> GetEnumerator()
     {
-      for (int x = 0; x < Columns; x++)
+      for (int y = 0; y < Rows; y++)
       {
-        for (int y = 0; y < Rows; y++)
+        for (int x = 0; x < Columns; x++)
         {
           yield return this.CellAt(new Point(x + 1, y + 1));
         }

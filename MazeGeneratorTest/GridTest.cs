@@ -6,14 +6,14 @@ namespace MazeGeneratorTest
 {
   public class GridTest
   {
-    private readonly Grid _grid;
+    private readonly Grid grid;
     private readonly Point _firstCoordinate;
     private readonly Point _secondCoordinate;
     private const int columns = 3;
     private const int rows = 4;
     public GridTest()
     {
-      _grid = new Grid(new Point(columns, rows));
+      grid = new Grid(new Point(columns, rows));
       _firstCoordinate = new Point(1, 1);
       _secondCoordinate = new Point(2, 1);
     }
@@ -21,15 +21,15 @@ namespace MazeGeneratorTest
     [Fact]
     public void TestLinkCells()
     {
-      _grid.LinkCells(_firstCoordinate, _secondCoordinate);
+      grid.LinkCells(_firstCoordinate, _secondCoordinate);
 
-      Assert.True(_grid.AreCellsLinked(_firstCoordinate, _secondCoordinate));
+      Assert.True(grid.AreCellsLinked(_firstCoordinate, _secondCoordinate));
     }
 
     [Fact]
     public void TestCellAtAccessingCell()
     {
-      Cell cell = _grid.CellAt(new Point(1, 1));
+      Cell cell = grid.CellAt(new Point(1, 1));
       Assert.True(cell.Column == 1);
       Assert.True(cell.Row == 1);
     }
@@ -41,7 +41,7 @@ namespace MazeGeneratorTest
     [InlineData(5, 3)] // Out of bounds east
     public void TestCellAtAccessingOutOfBounds(int x, int y)
     {
-      Cell cell = _grid.CellAt(new Point(x, y));
+      Cell cell = grid.CellAt(new Point(x, y));
       Assert.Null(cell);
     }
 
@@ -59,7 +59,7 @@ namespace MazeGeneratorTest
 +---+---+---+
 ";
 
-      Assert.Equal(expected, _grid.ToString());
+      Assert.Equal(expected, grid.ToString());
     }
   }
 }

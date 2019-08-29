@@ -15,6 +15,10 @@
         <label for="columns">Number of columns (minimum 2)</label>
         <input type="number" name="columns" min="2">
 
+        <label for="algorithm">Algorithm</label>
+        <select asp-for="Algorithms" asp-items="Html.GetEnumSelectList<Algorithms.Algorithm>()" name="algorithm">
+        </select>
+
         <button type="submit">Generate</button>
     </form>
 

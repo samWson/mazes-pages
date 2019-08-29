@@ -5,10 +5,12 @@ using System.Drawing;
 
 namespace MazeGenerator.Models
 {
+  /// <summary>
   /// Grid abstracts a collection of cells arranged in a rectangle.
   /// Access to cells in the grid is through X and Y coordinates.
-  /// The grid position of X = 1 and Y = 1 starts in the top left,
-  /// or north western corner.
+  /// The grid position of X = 1 and Y = 1 starts in the top left
+  /// i.e. the north western corner.
+  /// </summary>
   public class Grid : IEnumerable<Cell>
   {
     public int Columns { get; }
@@ -63,8 +65,10 @@ namespace MazeGenerator.Models
       return cells[coordinates.X - 1, coordinates.Y - 1];
     }
 
+    /// <summary>
     /// ToString() is overriden to output an ASCII art representation
     /// of the grid.
+    /// </summary>
     public override string ToString()
     {
       asciiArt = new StringBuilder();

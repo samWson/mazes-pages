@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace MazeGenerator.Algorithms
 {
-  public class BinaryTree
+  public class BinaryTree : IAlgorithm
   {
     private Grid grid;
     private List<Cell> neighbors;

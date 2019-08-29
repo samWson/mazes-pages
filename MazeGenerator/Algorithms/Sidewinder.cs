@@ -4,7 +4,7 @@ using System;
 
 namespace MazeGenerator.Algorithms
 {
-  class Sidewinder
+  class Sidewinder : IAlgorithm
   {
     private Grid grid;
     private bool atEasternBoundary;

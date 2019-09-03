@@ -2,6 +2,7 @@ using System.Text;
 using System.Collections.Generic;
 using System.Collections;
 using System.Drawing;
+using System.ComponentModel.DataAnnotations;
 
 namespace MazeGenerator.Models
 {
@@ -15,6 +16,18 @@ namespace MazeGenerator.Models
   {
     public int Columns { get; }
     public int Rows { get; }
+
+    /// <summary>
+    /// Enum Format are the formatting options available for how a grid can be visually represented.
+    /// </summary>
+    public enum Format
+    {
+      [Display(Name = "ASCII Art")]
+      Ascii,
+      [Display(Name = "PNG Image")]
+      Png
+    }
+
     public Grid(Point extent)
     {
       Columns = extent.X;
@@ -76,6 +89,14 @@ namespace MazeGenerator.Models
       buildRows();
 
       return asciiArt.ToString();
+    }
+
+    /// <summary>
+    /// ToPng() writes a representation of the grid to PNG image file.
+    /// </summary>
+    public void ToPng()
+    {
+
     }
 
     public IEnumerator<Cell> GetEnumerator()

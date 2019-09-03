@@ -406,3 +406,6 @@ ASALocalRun/
 
 # Ionide plugin
 .ionide/
+
+# Generated maze images
+*/MazeImages

@@ -1,4 +1,5 @@
 ﻿@page
+@using Models
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
@@ -19,11 +20,24 @@
         <select asp-for="Algorithms" asp-items="Html.GetEnumSelectList<Algorithms.Algorithm>()" name="algorithm">
         </select>
 
+        <label for="format">Format</label>
+        <select asp-for="Formats" asp-items="Html.GetEnumSelectList<Models.Grid.Format>()" name="format">
+        </select>
+
         <button type="submit">Generate</button>
     </form>
 
     <figure id="mazeFigure">
         <figcaption>Generated Maze</figcaption>
-        <pre id="mazeArea">@Model.Maze</pre>
+
+        @if (@Model.DisplayFormat == Grid.Format.Ascii)
+        {
+            <pre id="mazeAsciiArea">@Model.Maze</pre>
+        }
+        else if (@Model.DisplayFormat == Grid.Format.Png)
+        {
+            <img src="@Model.ImageSource" id="mazeImage" alt="An image of the generated maze."/>
+        }
+
     </figure>
 </div>

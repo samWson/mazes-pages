@@ -39,8 +39,8 @@ namespace MazeGenerator.Pages
           break;
         case Format.Png:
           grid.ToPng();
-          // FIXME: Check that this URL is correct.
-          ImageSource = "~/StaticFiles/MazeImages/maze.png";
+          // FIXME: Need an expert on serving static files in ASP.NET Core to help me get this image source to work.
+          ImageSource = @"~/StaticFiles/maze.png";
           break;
         default:
           // REVIEW: What would be better here is displaying a flash message at the GUI.

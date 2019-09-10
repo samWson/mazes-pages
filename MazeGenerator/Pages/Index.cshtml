@@ -36,7 +36,12 @@
         }
         else if (@Model.DisplayFormat == Grid.Format.Png)
         {
-            <img src="@Model.ImageSource" id="mazeImage" alt="An image of the generated maze."/>
+            <img src="@Model.ImageSource"
+                id="mazeImage"
+                alt="An image of the generated maze."
+                height="300"
+                width="300"
+                />
         }
 
     </figure>

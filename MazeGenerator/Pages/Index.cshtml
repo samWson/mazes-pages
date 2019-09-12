@@ -21,7 +21,7 @@
         </select>
 
         <label for="format">Format</label>
-        <select asp-for="Formats" asp-items="Html.GetEnumSelectList<Models.Grid.Format>()" name="format">
+        <select asp-for="Formats" asp-items="Html.GetEnumSelectList<Models.Format>()" name="format">
         </select>
 
         <button type="submit">Generate</button>
@@ -30,11 +30,11 @@
     <figure id="mazeFigure">
         <figcaption>Generated Maze</figcaption>
 
-        @if (@Model.DisplayFormat == Grid.Format.Ascii)
+        @if (@Model.DisplayFormat == Format.Ascii)
         {
             <pre id="mazeAsciiArea">@Model.Maze</pre>
         }
-        else if (@Model.DisplayFormat == Grid.Format.Png)
+        else if (@Model.DisplayFormat == Format.Png)
         {
             <img src="@Model.ImageSource"
                 id="mazeImage"

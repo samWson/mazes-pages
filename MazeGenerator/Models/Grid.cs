@@ -1,4 +1,3 @@
-using System.Text;
 using System.Collections.Generic;
 using System.Collections;
 using System.Drawing;
@@ -24,17 +23,6 @@ namespace MazeGenerator.Models
       PrepareGrid();
       ConfigureCells();
     }
-
-    private Cell[,] cells;
-
-    private const string cellCorner = "+";
-    private const string cellBody = "   "; // Three whitespaces.
-    private const string horizontalBoundary = "---";
-    private const string unlinkedVerticalBoundary = "|";
-    private const string linkedVerticalBoundary = " "; // One whitespace.
-    private const string linkedHorizontalBoundary = "   "; // Three whitespaces.
-    private const string unlinkedHorizontalBoundary = "---";
-    private StringBuilder asciiArt;
 
     public void LinkCells(Point firstCoordinate, Point secondCoordinate)
     {
@@ -73,11 +61,7 @@ namespace MazeGenerator.Models
     /// </summary>
     public override string ToString()
     {
-      asciiArt = new StringBuilder();
-      appendNorthBoundary();
-      buildRows();
-
-      return asciiArt.ToString();
+      return new MazeString(this).ToString();
     }
 
     /// <summary>
@@ -102,50 +86,6 @@ namespace MazeGenerator.Models
     IEnumerator IEnumerable.GetEnumerator()
     {
       return this.GetEnumerator();
-    }
-
-    private void appendNorthBoundary()
-    {
-      asciiArt.Append(cellCorner);
-
-      for (int x = 0; x < Columns; x++)
-      {
-        asciiArt.Append($"{horizontalBoundary}{cellCorner}");
-      }
-
-      asciiArt.Append("\n");
-    }
-
-    private void buildRows()
-    {
-      for (int y = 0; y < Rows; y++)
-      {
-        StringBuilder rowTopBuilder = new StringBuilder(unlinkedVerticalBoundary);
-        StringBuilder rowBottomBuilder = new StringBuilder(cellCorner);
-
-        for (int x = 0; x < Columns; x++)
-        {
-          Cell cell = this.CellAt(new Point(x + 1, y + 1));
-
-          rowTopBuilder.Append(buildCellTopHalf(cell));
-          rowBottomBuilder.Append(buildCellBottomHalf(cell));
-        }
-
-        asciiArt.AppendLine(rowTopBuilder.ToString());
-        asciiArt.AppendLine(rowBottomBuilder.ToString());
-      }
-    }
-
-    private string buildCellTopHalf(Cell cell)
-    {
-      string eastBoundary = (cell.IsLinked(cell.East)) ? linkedVerticalBoundary : unlinkedVerticalBoundary;
-      return $"{cellBody}{eastBoundary}";
-    }
-
-    private string buildCellBottomHalf(Cell cell)
-    {
-      string southBoundary = (cell.IsLinked(cell.South)) ? linkedHorizontalBoundary : unlinkedHorizontalBoundary;
-      return $"{southBoundary}{cellCorner}";
     }
 
     private void PrepareGrid()
